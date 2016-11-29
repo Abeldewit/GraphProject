@@ -3,16 +3,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
-
-
-
 public class Component
 extends JComponent
 {
-
-
-
-
 
 public void paintComponent(Graphics g)
 {
@@ -103,8 +96,8 @@ int counter = 0;
       g.fillOval(x-(r/2),y-(r/2),r,r);
       }
       g.setColor(Color.WHITE);
-      g.drawString("SUCH GRAPH",20,500);
-      g.drawString("MUCH WOW",500,50);
+      //g.drawString("SUCH GRAPH",20,500);
+      //g.drawString("MUCH WOW",500,50);
 
 
 }
