@@ -4,7 +4,11 @@ import java.io.*;
 import java.lang.Object;
 import javax.imageio.*;
 import java.awt.image.BufferedImage;
+<<<<<<< Updated upstream:Source/Game/ArcFrame.java
 
+=======
+ 
+>>>>>>> Stashed changes:Source/Game/ArcFrame.java
 public class ArcFrame {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
