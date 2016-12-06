@@ -24,8 +24,8 @@ public static void main(String[] args)
   final int FRAME_HEIGHT = 700;
   frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 
-  frame.setTitle("Chromatic Craziness 1.1");
-  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setTitle("Chromatic Craziness 1.1");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
   Component component = new Component();
