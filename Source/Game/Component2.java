@@ -10,7 +10,7 @@ public void paintComponent(Graphics g)
 {
   g.setColor(Color.BLACK);
   g.setFont(new Font("TimesRoman", Font.PLAIN, 70));
-  g.drawString("TEST",150,50);
+  g.drawString("TEST",15  0,50);
 
 
 

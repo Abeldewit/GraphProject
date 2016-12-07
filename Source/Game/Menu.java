@@ -23,24 +23,24 @@ public static void main(String[] args)
   Menu.setSize(FRAME_WIDTH, FRAME_HEIGHT);
   Menu.setTitle("Chromatic Craziness 1.1");
   Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  JButton button = new JButton("PLAY");
+  JButton play = new JButton("PLAY");
   JPanel panel2 = new JPanel();
-  JButton btn3 = new JButton("Settings");
-  button.setPreferredSize(new Dimension(50,50));
-  JPanel panel = new JPanel(new BorderLayout());
-  // panel.setMaximumSize(new Dimension(300,100));
+  JButton settings = new JButton("Settings");
+  play.setPreferredSize(new Dimension(100,50));
+  JPanel panel = new JPanel(new GridLayout());
+  panel.setMaximumSize(new Dimension(300,100));
 
-  panel.add(panel2, BorderLayout.CENTER);
-  panel.add(btn3, BorderLayout.PAGE_END);
-  panel.add(button, BorderLayout.PAGE_START);
 
+
+   Menu.add(play, BorderLayout.PAGE_START);
+   Menu.add(settings, BorderLayout.PAGE_END);
 
   Menu.add(panel);
 
 
 
 
-ActionListener listener = new ClickListener(); button.addActionListener(listener);
+ActionListener listener = new ClickListener(); play.addActionListener(listener);
 
 
 Menu.setVisible(true);
