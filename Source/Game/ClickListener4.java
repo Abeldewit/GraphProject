@@ -10,20 +10,22 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
-
 /**
    An action listener that prints a message.
 */
-public class ClickListener implements ActionListener {
-
+public class ClickListener4 implements ActionListener {
+//Highscores
 public void actionPerformed(ActionEvent event) {
   JFrame frame = new JFrame();
   final int FRAME_WIDTH = 700;
   final int FRAME_HEIGHT = 700;
   frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-  frame.setTitle("Chromatic Craziness ");
+  frame.setTitle("Chromatic Craziness: high scores");
   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  Component2 component2 = new Component2();
+
+  // JButton back = new JButton;
+  // frame.add(back);
+
 
   try{
   BufferedImage img = ImageIO.read(new File("background5.jpeg"));
@@ -34,10 +36,19 @@ public void actionPerformed(ActionEvent event) {
   frame.setContentPane(contentPane);
   frame.getContentPane().setBackground(Color.BLACK);
   Container c = frame.getContentPane();
-  contentPane.add(component2);
+
   } catch(IOException e) {e.printStackTrace();}
 
-    frame.add(component2);
+  JPanel backbutt = new JPanel();
+  frame.add(backbutt, BorderLayout.PAGE_START);
+  backbutt.setBackground(Color.black);
+  JButton back = new JButton("BACK");
+  ActionListener listener = new ClickMenu();
+  back.addActionListener(listener);
+
+  backbutt.add(back);
+  backbutt.setVisible(true);
+
     frame.setVisible(true);
 }
 }

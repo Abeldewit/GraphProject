@@ -1,3 +1,4 @@
+import java.awt.event.ActionEvent; import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -9,12 +10,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
-public class Menu
-{
-public static void main(String[] args)
+/**
+   An action listener that prints a message.
+*/
+public class ClickMenu implements ActionListener {
 
- {
+public void actionPerformed(ActionEvent event) {
 
   JFrame Menu = new JFrame();
 
@@ -68,7 +69,7 @@ Highscores.addActionListener(listener4);
 Menu.setVisible(true);
 Menu.getContentPane().setBackground(Color.BLACK);
 Container c = Menu.getContentPane();
- }
 
 
- }
+}
+}
