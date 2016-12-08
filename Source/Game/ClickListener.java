@@ -25,7 +25,7 @@ public void actionPerformed(ActionEvent event) {
   Component2 component2 = new Component2();
 
   try{
-  BufferedImage img = ImageIO.read(new File("background3.jpeg"));
+  BufferedImage img = ImageIO.read(new File("background5.jpeg"));
   ImageIcon icon = new ImageIcon(img);
   JLabel contentPane = new JLabel();
   contentPane.setIcon(icon);
