@@ -5,20 +5,22 @@ import javax.swing.JPanel;
 import javax.swing.JComponent;
 
 public class ArcDiagramComponent extends JComponent {
+	private int e;
+	private int v;
+	private int[][] adjMat;
+	public int getE() {
+		return e;
+	}
+	public int getV() {
+		return v;
+	}
+	public ArcDiagramComponent(int v, int e, int[][] adjMat) {
+		this.v = v;
+		this.e = e;
+		this.adjMat = adjMat;
+	}
 	public void paintComponent(Graphics g) {
-		Scanner in = new Scanner(System.in);
-		
-		System.out.println("How many vertices should there be? The maximum is 9!");
-		int v = in.nextInt(); //number of vertices
-		System.out.println("How many edges should there be?");
-		int e = in.nextInt(); //number of edges
-		
-		//creates a random graph
-		graphGen randomMat = new graphGen(v, e);
-		int[][] adjMat = randomMat.getMatrix();
-		
 		Graphics2D g2 = (Graphics2D) g;
-		
 
 		Color lines = new Color (163, 183, 183);
 		Color color9 = new Color (112, 0, 0);
@@ -81,5 +83,6 @@ public class ArcDiagramComponent extends JComponent {
 			g2.setColor(colors[i]);
 			g2.fillOval(x-(r/2),y-(r/2),r,r);
 		}
+		repaint();
 	}
 }
