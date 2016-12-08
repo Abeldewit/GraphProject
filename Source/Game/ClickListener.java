@@ -23,9 +23,20 @@ public void actionPerformed(ActionEvent event) {
   frame.setTitle("Chromatic Craziness 1.1");
   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   Component2 component2 = new Component2();
+
+  try{
+  BufferedImage img = ImageIO.read(new File("background3.jpeg"));
+  ImageIcon icon = new ImageIcon(img);
+  JLabel contentPane = new JLabel();
+  contentPane.setIcon(icon);
+  contentPane.setLayout(new BorderLayout());
+  frame.setContentPane(contentPane);
+  frame.getContentPane().setBackground(Color.BLACK);
+  Container c = frame.getContentPane();
+  contentPane.add(component2);
+  } catch(IOException e) {e.printStackTrace();}
+
     frame.add(component2);
-  frame.setVisible(true);
-
-
+    frame.setVisible(true);
 }
 }
