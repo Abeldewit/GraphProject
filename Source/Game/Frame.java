@@ -5,44 +5,41 @@ import java.lang.Object;
 import javax.imageio.*;
 import java.awt.image.BufferedImage;
 
-public class Frame
-{
-public static void main(String[] args)
+public class Frame {
+	public static void main(String[] args) {
+		JFrame frame = new JFrame();
+		try {
+			BufferedImage img = ImageIO.read(new File("background3.jpeg"));
+			ImageIcon icon = new ImageIcon(img);
+			JLabel contentPane = new JLabel();
+			contentPane.setIcon(icon);
+			contentPane.setLayout(new BorderLayout());
+			frame.setContentPane(contentPane);
+		} catch(IOException e) {e.printStackTrace();}
 
- {
-  JFrame frame = new JFrame();
-  try{
-  BufferedImage img = ImageIO.read(new File("background3.jpeg"));
-  ImageIcon icon = new ImageIcon(img);
-  JLabel contentPane = new JLabel();
-  contentPane.setIcon(icon);
-  contentPane.setLayout(new BorderLayout());
-  frame.setContentPane(contentPane);
-} catch(IOException e) {e.printStackTrace();}
+		final int FRAME_WIDTH = 1100;
+		final int FRAME_HEIGHT = 723;
+		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		frame.setResizable(false);
+		frame.setTitle("Chromatic Craziness");
 
-  final int FRAME_WIDTH = 700;
-  final int FRAME_HEIGHT = 700;
-  frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		TextField input = new TextField();
 
-    frame.setTitle("Chromatic Craziness 1.1");
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		int e = 0;
+		int v = 0;
+		while (e == 0 || v == 0 || v > 9 || e < Math.ceil(v/2) || e > ((v*v)-v)/2) {
+			e = input.getEdges();
+			v = (int) input.getVertices();
+			System.out.print("");
+		}
+		graphGen randomMat = new graphGen(v, e);
+		int[][] adjacencyMatrix = randomMat.getMatrix();
 
-
-  Component component = new Component();
-  frame.add(component);
-  frame.setVisible(true);
-  frame.getContentPane().setBackground(Color.BLACK);
-  Container c = frame.getContentPane();
-  // try{
-  //   c.add( new JPanelWithBackground("background2.jpeg"));
-  // }
-  // catch (Exception e) {e.printStackTrace();}
-
-
-
-
-
-
-  }
-
+		ArcDiagramComponent component = new ArcDiagramComponent(v, e, adjacencyMatrix);
+		frame.add(component);
+		frame.setVisible(true);
+		frame.getContentPane().setBackground(Color.BLACK);
+		Container c = frame.getContentPane();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
 }

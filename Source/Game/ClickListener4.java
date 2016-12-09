@@ -26,7 +26,7 @@ public void actionPerformed(ActionEvent event) {
   // JButton back = new JButton;
   // frame.add(back);
 
-
+  
   try{
   BufferedImage img = ImageIO.read(new File("background5.jpeg"));
   ImageIcon icon = new ImageIcon(img);
@@ -40,7 +40,7 @@ public void actionPerformed(ActionEvent event) {
   } catch(IOException e) {e.printStackTrace();}
 
   JPanel backbutt = new JPanel();
-  frame.add(backbutt, BorderLayout.PAGE_START);
+  frame.add(backbutt, BorderLayout.PAGE_END);
   backbutt.setBackground(Color.black);
   JButton back = new JButton("BACK");
   ActionListener listener = new ClickMenu();

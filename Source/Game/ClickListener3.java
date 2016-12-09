@@ -16,6 +16,7 @@ import java.awt.BorderLayout;
 public class ClickListener3 implements ActionListener {
 //settings
 public void actionPerformed(ActionEvent event) {
+
   JFrame frame = new JFrame();
   final int FRAME_WIDTH = 700;
   final int FRAME_HEIGHT = 700;
@@ -35,7 +36,7 @@ public void actionPerformed(ActionEvent event) {
 
   } catch(IOException e) {e.printStackTrace();}
   JPanel backbutt = new JPanel();
-  frame.add(backbutt, BorderLayout.PAGE_START);
+  frame.add(backbutt, BorderLayout.PAGE_END);
   backbutt.setBackground(Color.black);
   JButton back = new JButton("BACK");
 
@@ -45,5 +46,8 @@ back.addActionListener(listener);
   backbutt.add(back);
   backbutt.setVisible(true);
     frame.setVisible(true);
+
+
 }
+
 }

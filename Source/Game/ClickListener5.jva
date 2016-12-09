@@ -1,0 +1,16 @@
+public class ClickListener5 implements ActionListener {
+
+public void actionPerformed(ActionEvent event) {
+  try{
+  BufferedImage img = ImageIO.read(new File("background3.jpeg"));
+  ImageIcon icon = new ImageIcon(img);
+  JLabel contentPane = new JLabel();
+  contentPane.setIcon(icon);
+  contentPane.setLayout(new BorderLayout());
+  Menu.setContentPane(contentPane);
+} catch(IOException e) {e.printStackTrace();}
+
+
+
+}
+}

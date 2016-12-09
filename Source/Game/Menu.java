@@ -26,10 +26,12 @@ public static void main(String[] args)
   JButton play = new JButton("PLAY");
 
   JButton settings = new JButton("Settings");
-  play.setPreferredSize(new Dimension(100,50));
+
   JButton Highscores = new JButton("High scores");
 
+  JButton test = new JButton("TEST");
 
+  play.setPreferredSize(new Dimension(100,50));
   try{
   BufferedImage img = ImageIO.read(new File("background3.jpeg"));
   ImageIcon icon = new ImageIcon(img);
@@ -47,11 +49,12 @@ public static void main(String[] args)
 
 
   JPanel panel = new JPanel();
-      panel.setLayout(new GridLayout(2,2,1,1));
+      panel.setLayout(new GridLayout(3,3,1,1));
       JButton component= new JButton("Component");
 
       panel.add(settings);
       panel.add(Highscores );
+      panel.add(test);
       Menu.add(panel, BorderLayout.PAGE_END);
 
 
@@ -62,13 +65,13 @@ ActionListener listener3 = new ClickListener3();
 settings.addActionListener(listener3);
 ActionListener listener4 = new ClickListener4();
 Highscores.addActionListener(listener4);
-
+ActionListener listener5 = new ClickListener5();
+test.addActionListener(listener5);
 
 
 Menu.setVisible(true);
 Menu.getContentPane().setBackground(Color.BLACK);
 Container c = Menu.getContentPane();
  }
-
-
- }
+ 
+}
