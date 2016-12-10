@@ -73,5 +73,30 @@ test.addActionListener(listener5);
 Menu.setVisible(true);
 Menu.getContentPane().setBackground(Color.BLACK);
 Container c = Menu.getContentPane();
+
+test.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e)
+    {
+       Menu.dispose();
+    }
+});
+play.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e)
+    {
+       Menu.dispose();
+    }
+});
+settings.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e)
+    {
+       Menu.dispose();
+    }
+});
+Highscores.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e)
+    {
+       Menu.dispose();
+    }
+});
 }
 }

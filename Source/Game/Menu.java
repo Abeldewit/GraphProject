@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.*;
 public class Menu
 {
 public static void main(String[] args)
@@ -22,7 +23,7 @@ public static void main(String[] args)
   final int FRAME_HEIGHT = 700;
   Menu.setSize(FRAME_WIDTH, FRAME_HEIGHT);
   Menu.setTitle("Chromatic Craziness 1.1");
-  Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  Menu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
   JButton play = new JButton("PLAY");
 
   JButton settings = new JButton("Settings");
@@ -47,8 +48,7 @@ public static void main(String[] args)
   Menu.setTitle("Chromatic Craziness 1.1");
   Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
-  JPanel panel = new JPanel();
+    JPanel panel = new JPanel();
       panel.setLayout(new GridLayout(3,3,1,1));
       JButton component= new JButton("Component");
 
@@ -68,10 +68,35 @@ Highscores.addActionListener(listener4);
 ActionListener listener5 = new ClickListener5();
 test.addActionListener(listener5);
 
+test.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e)
+    {
+       Menu.dispose();
+    }
+});
+play.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e)
+    {
+       Menu.dispose();
+    }
+});
+settings.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e)
+    {
+       Menu.dispose();
+    }
+});
+Highscores.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e)
+    {
+       Menu.dispose();
+    }
+});
+
 
 Menu.setVisible(true);
 Menu.getContentPane().setBackground(Color.BLACK);
 Container c = Menu.getContentPane();
  }
- 
+
 }

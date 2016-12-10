@@ -26,7 +26,7 @@ public void actionPerformed(ActionEvent event) {
   // JButton back = new JButton;
   // frame.add(back);
 
-  
+
   try{
   BufferedImage img = ImageIO.read(new File("background5.jpeg"));
   ImageIcon icon = new ImageIcon(img);
@@ -50,5 +50,13 @@ public void actionPerformed(ActionEvent event) {
   backbutt.setVisible(true);
 
     frame.setVisible(true);
+
+    back.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e)
+        {
+           frame.dispose();
+        }
+    });
+
 }
 }

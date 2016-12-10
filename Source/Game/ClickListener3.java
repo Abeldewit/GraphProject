@@ -14,9 +14,10 @@ import java.awt.BorderLayout;
    An action listener that prints a message.
 */
 public class ClickListener3 implements ActionListener {
+  private JFrame Menu;
 //settings
 public void actionPerformed(ActionEvent event) {
-
+  // Menu.setVisible(false);
   JFrame frame = new JFrame();
   final int FRAME_WIDTH = 700;
   final int FRAME_HEIGHT = 700;
@@ -46,6 +47,14 @@ back.addActionListener(listener);
   backbutt.add(back);
   backbutt.setVisible(true);
     frame.setVisible(true);
+
+
+    back.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e)
+        {
+          frame.dispose();
+        }
+    });
 
 
 }
