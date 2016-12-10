@@ -49,6 +49,7 @@ public static void main(String[] args)
   Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     JPanel panel = new JPanel();
+    panel.setBackground(Color.black);
       panel.setLayout(new GridLayout(3,3,1,1));
       JButton component= new JButton("Component");
 
