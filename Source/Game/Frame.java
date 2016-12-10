@@ -22,7 +22,6 @@ public class Frame {
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		frame.setResizable(false);
 		frame.setTitle("Chromatic Craziness");
-
 		TextField input = new TextField();
 
 		int e = 0;

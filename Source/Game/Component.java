@@ -90,6 +90,12 @@ int counter = 0;
       int x = coords[n][0];
       int y = coords[n][1];
       n++;
+
+      ClickableVertex c = new ClickableVertex(80,80);
+
+      g.add( c );
+
+
       g.setColor(Color.BLACK);
       g.drawOval(x-(r/2),y-(r/2),r,r);
       g.setColor(Color.WHITE);

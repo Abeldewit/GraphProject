@@ -16,29 +16,51 @@ import java.awt.BorderLayout;
 */
 public class ClickListener implements ActionListener {
 
-// public void actionPerformed(ActionEvent event) {
-//   JFrame frame = new JFrame();
-//   final int FRAME_WIDTH = 700;
-//   final int FRAME_HEIGHT = 700;
-//   frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-//   frame.setTitle("Chromatic Craziness ");
-//   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//   Component2 component2 = new Component2();
-//
-//   try{
-//   BufferedImage img = ImageIO.read(new File("background5.jpeg"));
-//   ImageIcon icon = new ImageIcon(img);
-//   JLabel contentPane = new JLabel();
-//   contentPane.setIcon(icon);
-//   contentPane.setLayout(new BorderLayout());
-//   frame.setContentPane(contentPane);
-//   frame.getContentPane().setBackground(Color.BLACK);
-//   Container c = frame.getContentPane();
-//   contentPane.add(component2);
-//   } catch(IOException e) {e.printStackTrace();}
-//
-//
-//     frame.setVisible(true);
+public void actionPerformed(ActionEvent event) {
+  JFrame frame = new JFrame();
+  final int FRAME_WIDTH = 700;
+  final int FRAME_HEIGHT = 700;
+  frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+  frame.setTitle("Chromatic Craziness ");
+  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  Component2 component2 = new Component2();
+
+  try{
+  BufferedImage img = ImageIO.read(new File("background5.jpeg"));
+  ImageIcon icon = new ImageIcon(img);
+  JLabel contentPane = new JLabel();
+  contentPane.setIcon(icon);
+  contentPane.setLayout(new BorderLayout());
+  frame.setContentPane(contentPane);
+  frame.getContentPane().setBackground(Color.BLACK);
+  Container c = frame.getContentPane();
+  contentPane.add(component2);
+
+
+  } catch(IOException e) {e.printStackTrace();}
+
+
+
+          ClickableVertex a = new ClickableVertex(50,50);
+          frame.add(a );
+          ClickableVertex b= new ClickableVertex(150,150);
+          frame.add(b );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    frame.setVisible(true);
 
 
 
