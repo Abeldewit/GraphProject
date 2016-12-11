@@ -14,6 +14,8 @@ import java.awt.event.*;
 import java.io.File;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 public class Menu
 {
 public static void main(String[] args)
@@ -105,9 +107,10 @@ Menu.setVisible(true);
 Menu.getContentPane().setBackground(Color.BLACK);
 Container c = Menu.getContentPane();
 
-File Music = new File ("Music.wav");
+File Music = new File ("resonance.wav");
 PlaySound(Music);
 System.out.print("Chopin Waltz No.2");
+
  }
 
 
@@ -119,10 +122,7 @@ try{
     Thread.sleep(clip.getMicrosecondLength()/1000);
 }
 catch (Exception e) {
-
 }
-
-
 }
 
 }
