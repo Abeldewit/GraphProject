@@ -10,6 +10,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
+import java.io.File;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 /**
    An action listener that prints a message.
 */
@@ -100,5 +103,20 @@ public void actionPerformed(ActionEvent event) {
   Menu.setVisible(true);
   Menu.getContentPane().setBackground(Color.BLACK);
   Container c = Menu.getContentPane();
+  File Music = new File ("Music.wav");
+  PlaySound(Music);
+  System.out.print("Chopin Waltz No.2");
+
+
       }
+      static void PlaySound(File Sound){
+     try{
+         Clip clip = AudioSystem.getClip();
+         clip.open(AudioSystem.getAudioInputStream(Sound));
+         clip.start();
+         Thread.sleep(clip.getMicrosecondLength()/1000);
+     }
+     catch (Exception e) {
+     }
+     }
       }
