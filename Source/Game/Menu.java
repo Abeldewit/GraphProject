@@ -24,7 +24,9 @@ public static void main(String[] args)
   Menu.setSize(FRAME_WIDTH, FRAME_HEIGHT);
   Menu.setTitle("Chromatic Craziness 1.1");
   Menu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-  JButton play = new JButton("PLAY");
+  ImageIcon play1 = new ImageIcon("play.jpeg");
+
+  JButton play = new JButton(play1);
 
   JButton settings = new JButton("Settings");
 
@@ -32,7 +34,7 @@ public static void main(String[] args)
 
   JButton test = new JButton("TEST");
 
-  play.setPreferredSize(new Dimension(100,50));
+  play.setPreferredSize(new Dimension(150,150));
   try{
   BufferedImage img = ImageIO.read(new File("background3.jpeg"));
   ImageIcon icon = new ImageIcon(img);

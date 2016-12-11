@@ -35,30 +35,34 @@ public void actionPerformed(ActionEvent event) {
   frame.getContentPane().setBackground(Color.BLACK);
   Container c = frame.getContentPane();
   contentPane.add(component2);
-
-
   } catch(IOException e) {e.printStackTrace();}
 
-
-
-          ClickableVertex a = new ClickableVertex(50,50);
-          frame.add(a );
-          ClickableVertex b= new ClickableVertex(150,150);
-          frame.add(b );
+  JPanel panel = new JPanel();
+  panel.setLayout(new GridLayout(3,3));
 
 
 
 
-
-
-
-
-
+ImageIcon water = new ImageIcon("Bitter.jpeg");
+  JButton Bitter= new JButton(water);
+ImageIcon time = new ImageIcon("timefrenzy.jpeg");
+  JButton mode2= new JButton(time);
+  ImageIcon random = new ImageIcon("random.jpeg");
+  JButton mode3= new JButton(random);
 
 
 
 
 
+
+
+  panel.add(Bitter);
+  panel.add(mode2);
+  panel.add(mode3);
+  frame.add(panel);
+
+
+  panel.setOpaque(false);
 
     frame.setVisible(true);
 
