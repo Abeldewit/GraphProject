@@ -8,6 +8,11 @@ public class ArcDiagramComponent extends JComponent {
 	private int e;
 	private int v;
 	private int[][] adjMat;
+	public int[][] coords;
+
+	public int[][] getCoords(){
+			return coords;
+	}
 	public int getE() {
 		return e;
 	}
@@ -18,10 +23,16 @@ public class ArcDiagramComponent extends JComponent {
 		this.v = v;
 		this.e = e;
 		this.adjMat = adjMat;
+		this.coords = new int[v][2];
+		for (int d = 0; d < v; d++) {
+				coords[d][0] = 30+(d+1)*100;
+				coords[d][1] = 350;
+			}
 	}
+
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-
+		// not sure whether to edit this or not
 		Color lines = new Color (163, 183, 183);
 		Color color9 = new Color (112, 0, 0);
 		Color color8 = new Color (184, 0, 0);
@@ -52,11 +63,6 @@ public class ArcDiagramComponent extends JComponent {
 
 		};
 
-		int[][] coords = new int[v][2];
-		for (int d = 0; d < v; d++) {
-			coords[d][0] = 30+(d+1)*100;
-			coords[d][1] = 350;
-		}
 
 		//goes through the array and draws circles and lines on and between the coordinates respectively
 
@@ -81,7 +87,7 @@ public class ArcDiagramComponent extends JComponent {
 			}
 		}
 		for (int i = 0; i < v; i++) {
-
+			
 			int r = 50;
 			int x = coords[i][0];
 			int y = coords[i][1];
