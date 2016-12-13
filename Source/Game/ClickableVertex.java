@@ -15,6 +15,7 @@ public class ClickableVertex extends JComponent{
 	private int size = 100;
 	private Ellipse2D.Double circle;
 	private Color shapecolor;
+	public static int uid;
 
 	private static Color[] colors = {
 

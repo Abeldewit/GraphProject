@@ -35,10 +35,12 @@ public class Frame {
 		int[][] adjacencyMatrix = randomMat.getMatrix();
 
 		ArcDiagramComponent component = new ArcDiagramComponent(v, e, adjacencyMatrix);
-
+		// This is the number of vertexes
 		int l = component.getV();
 		int[][] coords = component.getCoords();
-		ClickableVertex[] set = new ClickableVertex[l];
+		frame.add(component);
+		// ORDER IS IMPORTANT
+		ClickableVertex[] set = new ClickableVertex[l+1];
 		for (int i=0; i<l;i++ ) {
 			int x = coords[i][0];
 			int y = coords[i][1];
@@ -47,8 +49,9 @@ public class Frame {
 			System.out.println(c);
 			frame.add(c);
 		}
+		ClickableVertex d = new ClickableVertex(80,80);
+		frame.add(d);
 
-		frame.add(component);
 		frame.setVisible(true);
 		frame.getContentPane().setBackground(Color.BLACK);
 		Container c = frame.getContentPane();
