@@ -9,9 +9,8 @@ public class ArcDiagramComponent extends JComponent {
 	private int v;
 	private int[][] adjMat;
 	public int[][] coords;
-
 	public int[][] getCoords(){
-			return coords;
+		return coords;
 	}
 	public int getE() {
 		return e;
@@ -25,14 +24,13 @@ public class ArcDiagramComponent extends JComponent {
 		this.adjMat = adjMat;
 		this.coords = new int[v][2];
 		for (int d = 0; d < v; d++) {
-				coords[d][0] = 30+(d+1)*100;
-				coords[d][1] = 350;
-			}
+			coords[d][0] = 30+(d+1)*100;
+			coords[d][1] = 350;
+		}
 	}
-
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		// not sure whether to edit this or not
+
 		Color lines = new Color (163, 183, 183);
 		Color color9 = new Color (112, 0, 0);
 		Color color8 = new Color (184, 0, 0);
@@ -46,23 +44,22 @@ public class ArcDiagramComponent extends JComponent {
 
 		//drawArc arc1 = new drawArc(int x, int y, int width, int height, int startAngle, int arcAngle)
 
+		Color[] colors = new Color[9];
+		colors[0] = color1;
+		colors[1] = color2;
+		colors[2] = color3;
+		colors[3] = color4;
+		colors[4] = color5;
+		colors[5] = color6;
+		colors[6] = color7;
+		colors[7] = color8;
+		colors[8] = color9;
 
-		//Made the colors the same as ClickableVertex
-		Color[] colors = {
-
-			Color.red,
-			Color.blue,
-			Color.yellow,
-			Color.green,
-			Color.black,
-			Color.cyan,
-			Color.orange,
-			Color.magenta,
-			Color.white,
-			Color.gray
-
-		};
-
+		int[][] coords = new int[v][2];
+		for (int d = 0; d < v; d++) {
+			coords[d][0] = 30+(d+1)*100;
+			coords[d][1] = 350;
+		}
 
 		//goes through the array and draws circles and lines on and between the coordinates respectively
 
@@ -87,7 +84,7 @@ public class ArcDiagramComponent extends JComponent {
 			}
 		}
 		for (int i = 0; i < v; i++) {
-			
+
 			int r = 50;
 			int x = coords[i][0];
 			int y = coords[i][1];

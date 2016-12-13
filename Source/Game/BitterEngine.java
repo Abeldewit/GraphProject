@@ -14,7 +14,7 @@ public class BitterEngine {
 
 
     /*
-		while(!GameOver) {
+		While(!GameOver) {
 		BitterGame.input()	-	Process Inputs (Ask User to select a position  )
 
 		BitterGame.update()   -    Update the game state ( check whether or not the Chromatic number has been reached if so )

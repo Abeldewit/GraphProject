@@ -4,7 +4,6 @@ import java.io.*;
 import java.lang.Object;
 import javax.imageio.*;
 import java.awt.image.BufferedImage;
-import java.awt.event.*;
 
 public class Frame {
 	public static void main(String[] args) {
@@ -36,6 +35,7 @@ public class Frame {
 		int[][] adjacencyMatrix = randomMat.getMatrix();
 
 		ArcDiagramComponent component = new ArcDiagramComponent(v, e, adjacencyMatrix);
+
 		int l = component.getV();
 		int[][] coords = component.getCoords();
 		ClickableVertex[] set = new ClickableVertex[l];
@@ -47,6 +47,7 @@ public class Frame {
 			System.out.println(c);
 			frame.add(c);
 		}
+
 		frame.add(component);
 		frame.setVisible(true);
 		frame.getContentPane().setBackground(Color.BLACK);

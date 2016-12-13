@@ -12,7 +12,7 @@ public class ClickableVertex extends JComponent{
 	private int y;
 	private int origin_X;
 	private int origin_Y;
-	private int size = 50;
+	private int size = 100;
 	private Ellipse2D.Double circle;
 	private Color shapecolor;
 
@@ -55,14 +55,11 @@ public class ClickableVertex extends JComponent{
 				}
 			}
 			public void mouseReleased(MouseEvent event) {}
-			public void mouseClicked(MouseEvent event){
-				System.out.println("It has been clicked");
-			}
+			public void mouseClicked(MouseEvent event){}
 			public void mouseEntered(MouseEvent event){}
 			public void mouseExited(MouseEvent event) {}
 
 			public boolean withinBorders (int x, int y){
-				System.out.println("It has been clicked within borders");
 
 				return	( Math.sqrt(Math.pow((x - origin_X),2) + Math.pow((y-origin_Y),2)) < size/2 );
 
@@ -98,10 +95,10 @@ public class ClickableVertex extends JComponent{
 		g_2D.fill(circle);
 		//g_2D.draw(circle);
 	}
-	// Duplicate
-	// public boolean withinBorders (int x, int y){
-	//
-	// 	return	( Math.sqrt(Math.pow((x - origin_X),2) + Math.pow((y-origin_Y),2)) < size/2 );
-	//
-	// }
+
+	public boolean withinBorders (int x, int y){
+
+		return	( Math.sqrt(Math.pow((x - origin_X),2) + Math.pow((y-origin_Y),2)) < size/2 );
+
+	}
 }
