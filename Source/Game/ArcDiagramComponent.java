@@ -32,9 +32,9 @@ public class ArcDiagramComponent extends JComponent {
 		Color color3 = new Color (170, 212, 14);
 		Color color2 = new Color (110, 163, 25);
 		Color color1 = new Color (77, 124, 14);
-		
-		//drawArc arc1 = new drawArc(int x, int y, int width, int height, int startAngle, int arcAngle)		
-		
+
+		//drawArc arc1 = new drawArc(int x, int y, int width, int height, int startAngle, int arcAngle)
+
 		Color[] colors = new Color[9];
 		colors[0] = color1;
 		colors[1] = color2;
@@ -45,13 +45,13 @@ public class ArcDiagramComponent extends JComponent {
 		colors[6] = color7;
 		colors[7] = color8;
 		colors[8] = color9;
-		
+
 		int[][] coords = new int[v][2];
 		for (int d = 0; d < v; d++) {
 			coords[d][0] = 30+(d+1)*100;
 			coords[d][1] = 350;
 		}
-	 
+
 		//goes through the array and draws circles and lines on and between the coordinates respectively
 
 		for (int i = 0; i < v; i++) {
@@ -75,6 +75,7 @@ public class ArcDiagramComponent extends JComponent {
 			}
 		}
 		for (int i = 0; i < v; i++) {
+
 			int r = 50;
 			int x = coords[i][0];
 			int y = coords[i][1];
@@ -82,6 +83,7 @@ public class ArcDiagramComponent extends JComponent {
 			g2.drawOval(x-(r/2),y-(r/2),r,r);
 			g2.setColor(colors[i]);
 			g2.fillOval(x-(r/2),y-(r/2),r,r);
+
 		}
 		repaint();
 	}
