@@ -38,10 +38,12 @@ public class Frame {
 		ArcDiagramComponent component = new ArcDiagramComponent(v, e, adjacencyMatrix);
 		int l = component.getV();
 		int[][] coords = component.getCoords();
+		ClickableVertex[] set = new ClickableVertex[l];
 		for (int i=0; i<l;i++ ) {
 			int x = coords[i][0];
 			int y = coords[i][1];
 			ClickableVertex c = new ClickableVertex(x,y);
+			set[l] = c;
 			System.out.println(c);
 			frame.add(c);
 		}
