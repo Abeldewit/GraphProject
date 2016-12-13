@@ -21,7 +21,7 @@ public class Menu
 public static void main(String[] args)
 
  {
-   //creating the frame
+
 
   JFrame Menu = new JFrame();
 
@@ -31,20 +31,17 @@ public static void main(String[] args)
   Menu.setSize(FRAME_WIDTH, FRAME_HEIGHT);
   Menu.setTitle("Chromatic Craziness 1.1");
   Menu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-
-//creating the buttons
   ImageIcon play1 = new ImageIcon("play.jpeg");
+
   JButton play = new JButton(play1);
+
   JButton settings = new JButton("Settings");
+
   JButton Highscores = new JButton("High scores");
+
   JButton test = new JButton("TEST");
 
-//making the play button bigger
   play.setPreferredSize(new Dimension(150,150));
-
-
-//try catch block to set the wallpaper
   try{
   BufferedImage img = ImageIO.read(new File("background3.jpeg"));
   ImageIcon icon = new ImageIcon(img);
@@ -56,33 +53,30 @@ public static void main(String[] args)
 
 
 
-  Menu.add(play, BorderLayout.PAGE_START);
-
-    //creating a panel for the other buttons
+   Menu.add(play, BorderLayout.PAGE_START);
+  Menu.setTitle("Chromatic Craziness 1.1");
+  Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     JPanel panel = new JPanel();
     panel.setBackground(Color.black);
-    panel.setLayout(new GridLayout(3,3,1,1));
-    JButton component= new JButton("Component");
+      panel.setLayout(new GridLayout(3,3,1,1));
+      JButton component= new JButton("Component");
 
       panel.add(settings);
       panel.add(Highscores );
       panel.add(test);
       Menu.add(panel, BorderLayout.PAGE_END);
 
-      //adding action listeners to said buttons
 
-     ActionListener listener = new ClickListener();
-     play.addActionListener(listener);
-     ActionListener listener3 = new ClickListener3();
-     settings.addActionListener(listener3);
-     ActionListener listener4 = new ClickListener4();
-     Highscores.addActionListener(listener4);
-     ActionListener listener5 = new ClickListener5();
-     test.addActionListener(listener5);
 
-     //adding more listeners so the menu frame closes when you proceed to free up memory
-
+ActionListener listener = new ClickListener();
+play.addActionListener(listener);
+ActionListener listener3 = new ClickListener3();
+settings.addActionListener(listener3);
+ActionListener listener4 = new ClickListener4();
+Highscores.addActionListener(listener4);
+ActionListener listener5 = new ClickListener5();
+test.addActionListener(listener5);
 
 test.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e)
@@ -115,9 +109,8 @@ Menu.setVisible(true);
 Menu.getContentPane().setBackground(Color.BLACK);
 Container c = Menu.getContentPane();
 
-// playinh music
-
 File Music = new File ("resonance.wav");
+<<<<<<< HEAD
 audio = PlaySound(Music);
 
 
@@ -137,5 +130,23 @@ audio = PlaySound(Music);
   static void StopSound(Clip audio) {
     audio.stop();
   }
+=======
+PlaySound(Music);
+System.out.print("Chopin Waltz No.2");
+
+ }
+
+
+ static void PlaySound(File Sound){
+try{
+    Clip clip = AudioSystem.getClip();
+    clip.open(AudioSystem.getAudioInputStream(Sound));
+    clip.start();
+    Thread.sleep(clip.getMicrosecondLength()/1000);
+}
+catch (Exception e) {
+}
+}
+>>>>>>> parent of 475a348... added comments for clarification
 
 }
