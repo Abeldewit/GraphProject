@@ -17,6 +17,8 @@ import java.awt.BorderLayout;
 public class ClickListener implements ActionListener {
 
 public void actionPerformed(ActionEvent event) {
+  // creating the frame
+
   JFrame frame = new JFrame();
   final int FRAME_WIDTH = 700;
   final int FRAME_HEIGHT = 700;
@@ -24,6 +26,8 @@ public void actionPerformed(ActionEvent event) {
   frame.setTitle("Chromatic Craziness ");
   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   Component2 component2 = new Component2();
+
+  //setting the wallpaper
 
   try{
   BufferedImage img = ImageIO.read(new File("background5.jpeg"));
@@ -37,11 +41,13 @@ public void actionPerformed(ActionEvent event) {
   contentPane.add(component2);
   } catch(IOException e) {e.printStackTrace();}
 
+  //making panel that has the butons
+
   JPanel panel = new JPanel();
   panel.setLayout(new GridLayout(3,3));
 
 
-
+  //creating the buttons
 
 ImageIcon water = new ImageIcon("Bitter.jpeg");
   JButton Bitter= new JButton(water);
@@ -54,7 +60,7 @@ ImageIcon time = new ImageIcon("timefrenzy.jpeg");
 
 
 
-
+  //adding the buttons and making everything visible
 
   panel.add(Bitter);
   panel.add(mode2);

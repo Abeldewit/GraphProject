@@ -10,12 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
-import javax.swing.*;
-import java.awt.*;
-import java.io.*;
-import java.lang.Object;
-import javax.imageio.*;
-import java.awt.image.BufferedImage;
+
 /**
    An action listener that prints a message.
 */
