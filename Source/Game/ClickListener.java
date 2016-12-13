@@ -70,7 +70,7 @@ ImageIcon time = new ImageIcon("timefrenzy.jpeg");
 
   panel.setOpaque(false);
 
-    frame.setVisible(true);
+  frame.setVisible(true);
 
 
 
