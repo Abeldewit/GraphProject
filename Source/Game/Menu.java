@@ -25,6 +25,7 @@ public static void main(String[] args)
 
   JFrame Menu = new JFrame();
 
+  Clip audio;
   final int FRAME_WIDTH = 700;
   final int FRAME_HEIGHT = 700;
   Menu.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -87,6 +88,7 @@ test.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e)
     {
        Menu.dispose();
+       StopSound(audio);
     }
 });
 play.addActionListener(new ActionListener() {
@@ -116,21 +118,24 @@ Container c = Menu.getContentPane();
 // playinh music
 
 File Music = new File ("resonance.wav");
-PlaySound(Music);
+audio = PlaySound(Music);
 
 
  }
 
 //method for music
- static void PlaySound(File Sound){
-try{
-    Clip clip = AudioSystem.getClip();
-    clip.open(AudioSystem.getAudioInputStream(Sound));
-    clip.start();
-    Thread.sleep(clip.getMicrosecondLength()/1000);
-}
-catch (Exception e) {
-}
-}
+ static Clip PlaySound(File Sound){
+   try{
+     Clip clip = AudioSystem.getClip();
+     clip.open(AudioSystem.getAudioInputStream(Sound));
+     clip.start();
+     Thread.sleep(clip.getMicrosecondLength()/1000);
+     return clip;
+   } catch (Exception e) {return null;}
+  }
+
+  static void StopSound(Clip audio) {
+    audio.stop();
+  }
 
 }
