@@ -9,7 +9,7 @@ public class Frame {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		try {
-			BufferedImage img = ImageIO.read(new File("background3.jpeg"));
+			BufferedImage img = ImageIO.read(new File("background5.jpeg"));
 			ImageIcon icon = new ImageIcon(img);
 			JLabel contentPane = new JLabel();
 			contentPane.setIcon(icon);
