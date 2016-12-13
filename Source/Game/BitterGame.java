@@ -6,10 +6,14 @@ public class BitterGame extends BitterEngine {
 
 
     */
+    // Generate Graph
+    public void init(){
+      //draw super.difficulty
+
+    }
+
 
     //display statistics of the game
-
-
     public void stats(){
 
 

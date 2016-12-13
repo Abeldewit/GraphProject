@@ -1,4 +1,4 @@
-import javax.swing.*;
+eimport javax.swing.*;
 import java.io.*;
 import sun.audio.*;
 import java.awt.event.*;
@@ -95,10 +95,10 @@ public class ClickableVertex extends JComponent{
 		g_2D.fill(circle);
 		//g_2D.draw(circle);
 	}
-
-	public boolean withinBorders (int x, int y){
-
-		return	( Math.sqrt(Math.pow((x - origin_X),2) + Math.pow((y-origin_Y),2)) < size/2 );
-
-	}
+	// Duplicate
+	// public boolean withinBorders (int x, int y){
+	//
+	// 	return	( Math.sqrt(Math.pow((x - origin_X),2) + Math.pow((y-origin_Y),2)) < size/2 );
+	//
+	// }
 }
