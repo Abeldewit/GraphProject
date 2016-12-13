@@ -35,6 +35,8 @@ public class ArcDiagramComponent extends JComponent {
 
 		//drawArc arc1 = new drawArc(int x, int y, int width, int height, int startAngle, int arcAngle)
 
+
+		//The colors here are different to the colors in ClickableVertex!
 		Color[] colors = new Color[9];
 		colors[0] = color1;
 		colors[1] = color2;
