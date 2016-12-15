@@ -53,9 +53,9 @@ public static void main(String[] args)
 
 
 
-   Menu.add(play, BorderLayout.PAGE_START);
-  Menu.setTitle("Chromatic Craziness 1.1");
-  Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    Menu.add(play, BorderLayout.PAGE_START);
+    Menu.setTitle("Chromatic Craziness 1.1");
+    Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     JPanel panel = new JPanel();
     panel.setBackground(Color.black);
@@ -82,7 +82,7 @@ test.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e)
     {
        Menu.dispose();
-       StopSound(audio);
+
     }
 });
 play.addActionListener(new ActionListener() {
@@ -127,25 +127,8 @@ audio = PlaySound(Music);
    } catch (Exception e) {return null;}
   }
 
-  static void StopSound(Clip audio) {
-    audio.stop();
-  }
 
-PlaySound(Music);
-System.out.print("Chopin Waltz No.2");
+
+
 
  }
-
-
- static void PlaySound(File Sound){
-try{
-    Clip clip = AudioSystem.getClip();
-    clip.open(AudioSystem.getAudioInputStream(Sound));
-    clip.start();
-    Thread.sleep(clip.getMicrosecondLength()/1000);
-}
-catch (Exception e) {
-}
-}
-
-}

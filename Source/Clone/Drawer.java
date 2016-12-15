@@ -14,7 +14,9 @@ public class Drawer extends JPanel{
 	private VertexShape[] vertecies;
 	private EdgeShape[] edges;
 	private static int chromatic_number = 0;
+	private static int time = 0;
 	
+	private static JLabel timeField = new JLabel("   Time Left: "+time+" s");
 	private static JLabel chrField = new JLabel("   Chromatic Number: "+chromatic_number);
 	private static JTextField vertexField = new JTextField(5);
 	private static JTextField edgeField = new JTextField(5);
@@ -68,6 +70,9 @@ public class Drawer extends JPanel{
 				for(int i=0;i<vertecies.length;i++){
 					drawVertex(vertecies[i]);
 				}
+				
+				startTimer();
+				
 			}
 		}
 		//listener
@@ -171,6 +176,16 @@ public class Drawer extends JPanel{
 		}
 	}
 	
+	public void startTimer() throws InterruptedException {
+		
+		time = 60;
+		
+		while(time>0){
+			Thread.sleep(1000);
+			time --;
+		}
+	}
+	
 	public static void main(String[] args){
 		
 		Drawer d = new Drawer();
@@ -185,6 +200,7 @@ public class Drawer extends JPanel{
 		controlPanel.add(edgeField);
 		controlPanel.add(startButton);
 		controlPanel.add(chrField);
+		controlPanel.add(timeField);
 		
 		JPanel contentPanel = new JPanel(new BorderLayout());
 		contentPanel.add(controlPanel, BorderLayout.SOUTH);

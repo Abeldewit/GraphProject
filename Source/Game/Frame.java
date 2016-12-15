@@ -38,8 +38,15 @@ public class Frame {
 		// This is the number of vertexes
 		int l = component.getV();
 		int[][] coords = component.getCoords();
-		frame.add(component);
-		// ORDER IS IMPORTANT
+		System.out.println(coords);
+		// ORDER of adding JComponents IS IMPORTANT
+
+		JPanel panel = new JPanel();
+		Container content = frame.getContentPane();
+		content.add(component);
+		frame.revalidate();
+    frame.repaint();
+		frame.pack();
 		ClickableVertex[] set = new ClickableVertex[l+1];
 		for (int i=0; i<l;i++ ) {
 			int x = coords[i][0];
@@ -47,10 +54,10 @@ public class Frame {
 			ClickableVertex c = new ClickableVertex(x,y);
 			set[l] = c;
 			System.out.println(c);
-			frame.add(c);
+			content.add(c);
+
 		}
-		ClickableVertex d = new ClickableVertex(80,80);
-		frame.add(d);
+
 
 		frame.setVisible(true);
 		frame.getContentPane().setBackground(Color.BLACK);
