@@ -1,46 +1,56 @@
 public class BruteForce {
-  public static void main(String[] args) {
-    
-	graphGen randomgraph = new graphGen(v, e);
-	int[][] adjecentMatrix = randomgraph.getMatrix();
 	
-	int colourAmount = 1;
-    int[] colourArray = new int[n];
+	private static boolean test;
+	private int v;
+	private int e;
+	private int[][] adjecentMatrix;
+	private static int middle;
+	
+	public BruteForce(){
+		this.v = v;
+		this.e = e;
+		this.adjecentMatrix = adjecentMatrix;
+		
+	}
+	
+	public static int getChromatic (int v, int e,int[][] adjecentMatrix) {
+    
+		int colourAmount = 1;
+		int[] colourArray = new int[v];
 
-    for(int i = 0; i < n; i++) {
-      colourArray[i] = 0;
-    }
+		for(int i = 0; i < v; i++) {
+			colourArray[i] = 0;
+		}
 
-    int testCase = 10;
-    boolean whilebool = true;
-    boolean firsttry = true;
+		int testCase = 10;
+		boolean whilebool = true;
+		boolean firsttry = true;
 
-    //calculate upper bound to prevent redundant calculations
-    int upperBound = (int) Math.sqrt(2*m) + 1;
+		//calculate upper bound to prevent redundant calculations
+		int upperBound = (int) Math.sqrt(2*e) + 1;
 
-    int low = 0;
-    int high = upperBound;
+		int low = 0;
+		int high = upperBound;
 
-    //binary search (start in the middle, if that colour works go lower, if it doesnt go higher )
-    while(high >= low)
-    {
-      int middle = (low + high) / 2;
-      System.out.println("Testing " + middle);
-      graphColour(0,adjecentMatrix,n,middle,colourArray);
-      if(test == true)
-      {
-        high = middle -1;
-      }
-      if(test == false)
-      {
-        low = middle + 1;
-      }
-    }
+		//binary search (start in the middle, if that colour works go lower, if it doesnt go higher )
+		while(high >= low){
+			
+			middle = (low + high) / 2;
+			System.out.println("Testing " + middle);
+			graphColour(0,adjecentMatrix,v,middle,colourArray);
+			if(test == true){
+				high = middle -1;
+			}
+			if(test == false){
+				low = middle + 1;
+			}
+		}
 
-   System.out.println("Got it!");
-   //graphColour(0,adjecentMatrix,n,testCase,colourArray);
+		System.out.println("Got it!");
+		return (middle+1);
+		//graphColour(0,adjecentMatrix,n,testCase,colourArray);
 
- }
+	}
 
  public static void graphColour(int k,int[][] G, int n, int m, int[] x)
  {
