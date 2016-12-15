@@ -8,14 +8,20 @@ public class testAlgo{
 		graphGen randomgraph = new graphGen(v, e);
 		int[][] graph = randomgraph.getMatrix();
 
-		Track Chr = new Track();
 
 		int M = 0; // Number of colors
 
-		while(!Chr.graphColoring(graph, M, v)){
-			M++;
-		}
+		// while(!Chr.graphColoring(graph, M, v)){
+		// 	M++;
+		// }
 
+		// while(graphColor(graph,M) == 0){
+		// 	M++;
+		// }
+		GraphColoring n = new GraphColoring();
+
+		System.out.println(n.graphColor(graph,15));
+		M = n.graphColor(graph,15);
 		System.out.println("Chromatic number:"+M);
 	}
 }
@@ -42,8 +48,8 @@ class GraphColoring
         catch (Exception e)
         {
             System.out.println("\nSolution exists ");
-            display();
-						return
+            int chroma = display();
+						return chroma;
         }
     }
     /** function to assign colors recursively **/
@@ -74,11 +80,18 @@ class GraphColoring
         return true;
     }
     /** display solution **/
-    public void display()
+    public int display()
     {
+				int max=0;
         System.out.print("\nColors : ");
         for (int i = 0; i < V; i++)
             System.out.print(color[i] +" ");
         System.out.println();
+				for (int i = 0; i<V; i++ ) {
+						if(color[i] > max) {
+							max = color[i];
+						}
+				}
+				return max;
     }
 }
