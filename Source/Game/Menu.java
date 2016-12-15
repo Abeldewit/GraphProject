@@ -53,9 +53,9 @@ public static void main(String[] args)
 
 
 
-   Menu.add(play, BorderLayout.PAGE_START);
-  Menu.setTitle("Chromatic Craziness 1.1");
-  Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    Menu.add(play, BorderLayout.PAGE_START);
+    Menu.setTitle("Chromatic Craziness 1.1");
+    Menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     JPanel panel = new JPanel();
     panel.setBackground(Color.black);
