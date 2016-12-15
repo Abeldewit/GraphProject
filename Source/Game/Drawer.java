@@ -140,15 +140,15 @@ public class Drawer extends JPanel{
 
 
 		//drawing shapes
-		g_2D.setStroke(new BasicStroke( 10.0F ));
+		g_2D.setStroke(new BasicStroke());
 		if(edge.getVertexA().getColor() != edge.getVertexB().getColor()){
 			g_2D.setColor(Color.green);
 			g_2D.draw(edge.getShape());
-			g_2D.setStroke(new BasicStroke( 4.0F ));
+			g_2D.setStroke(new BasicStroke());
 		}else{
 			g_2D.setColor(Color.red);
 			g_2D.draw(edge.getShape());
-			g_2D.setStroke(new BasicStroke( 4.0F ));
+			g_2D.setStroke(new BasicStroke());
 		}
 	}
 
