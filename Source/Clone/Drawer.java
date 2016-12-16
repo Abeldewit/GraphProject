@@ -214,6 +214,7 @@ public class Drawer extends JPanel{
 		
 		System.out.println("GAME OVER");
 		frame.dispose();
+		new GameOver(100);
 		
 	}
 	
