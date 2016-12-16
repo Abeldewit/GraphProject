@@ -4,14 +4,7 @@ import java.io.*;
 import java.lang.Object;
 import javax.imageio.*;
 import java.awt.image.BufferedImage;
-import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.*;
-import java.io.File;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 public class Menu
