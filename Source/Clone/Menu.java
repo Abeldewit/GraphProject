@@ -132,12 +132,11 @@ new Menu();
 
 
 //method for music
-public void PlaySound(File Sound){
+public static void PlaySound(File Sound){
    try{
      clip = AudioSystem.getClip();
      clip.open(AudioSystem.getAudioInputStream(Sound));
      clip.start();
-     clip.loop(1);
      Thread.sleep(clip.getMicrosecondLength()/1000);
 
 

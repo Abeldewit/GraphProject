@@ -10,18 +10,21 @@ import javax.imageio.*;
 import java.awt.image.BufferedImage;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.*;
 
 public class Drawer extends JPanel{
 	
 	private static VertexShape[] vertecies;
 	private static EdgeShape[] edges;
 	private static int chromatic_number = 0;
-	private static int time = 0;
+	private static int time = 60;
 	private static boolean gameOn = true;
+	private static int score = 0;
 	
 	private static JFrame frame;
 	private static JLabel timeField = new JLabel("   Time Left: "+time+" s");
 	private static JLabel chrField = new JLabel("   Chromatic Number: "+chromatic_number);
+	private static JLabel scoreField = new JLabel("   Score: "+score);
 	private static JTextField vertexField = new JTextField(5);
 	private static JTextField edgeField = new JTextField(5);
 	private static JButton startButton = new JButton("generate");
@@ -38,7 +41,7 @@ public class Drawer extends JPanel{
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 try{
-					BufferedImage image = ImageIO.read(new File("Resources/background5.jpeg"));
+					BufferedImage image = ImageIO.read(new File("resources/background5.jpeg"));
 					g.drawImage(image, 0, 0, null);
 				}catch(IOException e) {e.printStackTrace();}
             }
@@ -113,7 +116,7 @@ public class Drawer extends JPanel{
 				
 		//redrawing empty background
 		try{
-			BufferedImage image = ImageIO.read(new File("Resources/background5.jpeg"));
+			BufferedImage image = ImageIO.read(new File("resources/background5.jpeg"));
 			g.drawImage(image, 0, 0, null);
 		}catch(IOException ex) {ex.printStackTrace();}
 		
@@ -142,10 +145,12 @@ public class Drawer extends JPanel{
 		//drawing shapes
 		g_2D.setStroke(new BasicStroke( 1.0F ));
 		if(edge.getVertexA().getColor() != edge.getVertexB().getColor()){
+			edge.setColor(Color.green);
 			g_2D.setColor(Color.green);
 			g_2D.draw(edge.getShape());
 			g_2D.setStroke(new BasicStroke( 4.0F ));
 		}else{
+			edge.setColor(Color.red);
 			g_2D.setColor(Color.red);
 			g_2D.draw(edge.getShape());
 			g_2D.setStroke(new BasicStroke( 4.0F ));
@@ -196,9 +201,12 @@ public class Drawer extends JPanel{
 		timer.scheduleAtFixedRate(new TimerTask() {
 
 			public void run() {
-				timeField.setText("   Time Left: "+interval+" s");
+				if(interval<60){
+					timeField.setText("   Time Left: "+interval+" s");
+					updateScore();
+				}
 				System.out.println(setInterval());
-				if(interval ==52){
+				if(interval ==0){
 				gameOver();
 				timer.cancel();
 				}	
@@ -218,7 +226,41 @@ public class Drawer extends JPanel{
 		
 	}
 	
-	public static void main(String[] args){
+	public static void updateScore(){
+		
+		boolean valid = true;
+		
+		for(int i=0;i<edges.length;i++){
+			if(edges[i].getColor() == Color.red){
+				score = 0;
+				System.out.println("score set to none");
+				scoreField.setText("   Score: "+score);
+				valid = false;
+				break;
+			}
+		}
+		if(valid){
+			score = vertecies.length * edges.length * interval - 100 * (countUsedColors() - chromatic_number);
+			scoreField.setText("   Score: "+score);
+		}
+	}
+	
+	public static int countUsedColors(){
+		ArrayList<Color> usedColours = new ArrayList<Color>();
+		
+		for(int i=0;i<vertecies.length;i++){
+			if(i==0){
+				usedColours.add(vertecies[0].getColor());
+			}else{
+				if(!usedColours.contains(vertecies[i].getColor())){
+					usedColours.add(vertecies[i].getColor());
+				}
+			}
+		}
+		return (usedColours.size());
+	}
+	
+	public static void main(String args[]){
 		
 		Drawer d = new Drawer();
 		
@@ -229,6 +271,7 @@ public class Drawer extends JPanel{
 		edgeLabel.setForeground(Color.WHITE);
 		timeField.setForeground(Color.WHITE);
 		chrField.setForeground(Color.WHITE);
+		scoreField.setForeground(Color.WHITE);
 		
 		
 		controlPanel = new JPanel(){
@@ -236,7 +279,7 @@ public class Drawer extends JPanel{
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				try{
-			BufferedImage image = ImageIO.read(new File("Resources/background5.jpeg"));
+			BufferedImage image = ImageIO.read(new File("resources/background5.jpeg"));
 			g.drawImage(image, 0, 0, null);
 			}catch(IOException e) {e.printStackTrace();}
 			}
@@ -250,6 +293,7 @@ public class Drawer extends JPanel{
 		controlPanel.add(startButton);
 		controlPanel.add(chrField);
 		controlPanel.add(timeField);
+		controlPanel.add(scoreField);
 		
 		JPanel contentPanel = new JPanel(new BorderLayout());
 		contentPanel.add(controlPanel, BorderLayout.LINE_END);
@@ -263,6 +307,6 @@ public class Drawer extends JPanel{
 		frame.setVisible(true);
 		frame.setResizable(false);
 		
-		startTimer(60);
+		startTimer(70);
 	}
 }
