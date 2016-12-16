@@ -131,7 +131,7 @@ public class Drawer extends JPanel{
 		Graphics2D g_2D = (Graphics2D) g;
 
 		//drawing shapes
-		g_2D.setStroke(new BasicStroke( 4.0F ));
+		g_2D.setStroke(new BasicStroke( 1.0F ));
 		if(edge.getVertexA().getColor() != edge.getVertexB().getColor()){
 			g_2D.setColor(Color.green);
 			g_2D.draw(edge.getShape());
@@ -234,7 +234,7 @@ public class Drawer extends JPanel{
 		contentPanel.setPreferredSize(new Dimension(900, 723));
 
 		JFrame frame = new JFrame();
-
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setSize(1100, 723);
 		frame.add(contentPanel);
 		frame.setVisible(true);

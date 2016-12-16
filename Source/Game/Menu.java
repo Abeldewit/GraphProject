@@ -114,7 +114,7 @@ Container c = Menu.getContentPane();
 
 File Music = new File ("resources/resonance.wav");
 
-PlaySound(Music);
+PlayMusic(Music);
 
 
 }
@@ -132,12 +132,24 @@ new Menu();
 
 
 //method for music
-public void PlaySound(File Sound){
+public static void PlaySound(File Sound){
    try{
      clip = AudioSystem.getClip();
      clip.open(AudioSystem.getAudioInputStream(Sound));
      clip.start();
-     clip.loop(5);
+     clip.loop(1);
+     Thread.sleep(clip.getMicrosecondLength()/1000);
+
+
+   } catch (Exception e) {return;}
+
+}
+public static void PlayMusic(File Sound){
+   try{
+     clip = AudioSystem.getClip();
+     clip.open(AudioSystem.getAudioInputStream(Sound));
+     clip.start();
+     clip.loop(20);
      Thread.sleep(clip.getMicrosecondLength()/1000);
 
 

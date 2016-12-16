@@ -54,18 +54,21 @@ ImageIcon time = new ImageIcon("resources/timefrenzy.jpeg");
   Bitter.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e)
       {
+        frame.setVisible(false);
          Drawer.main();
       }
   });
   mode2.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e)
       {
+        frame.setVisible(false);
          Drawer.main();
       }
   });
   mode3.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e)
       {
+        frame.setVisible(false);
          Drawer.main();
       }
   });
