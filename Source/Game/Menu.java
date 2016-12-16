@@ -130,7 +130,6 @@ public void PlaySound(File Sound){
      clip = AudioSystem.getClip();
      clip.open(AudioSystem.getAudioInputStream(Sound));
      clip.start();
-     clip.loop(1);
      Thread.sleep(clip.getMicrosecondLength()/1000);
 
 

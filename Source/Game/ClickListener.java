@@ -23,7 +23,7 @@ public void actionPerformed(ActionEvent event) {
   frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
   frame.setTitle("Chromatic Craziness ");
   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  Component2 component2 = new Component2();
+  
 
   try{
   BufferedImage img = ImageIO.read(new File("resources/background5.jpeg"));
@@ -34,7 +34,6 @@ public void actionPerformed(ActionEvent event) {
   frame.setContentPane(contentPane);
   frame.getContentPane().setBackground(Color.BLACK);
   Container c = frame.getContentPane();
-  contentPane.add(component2);
   } catch(IOException e) {e.printStackTrace();}
 
   JPanel panel = new JPanel();
