@@ -17,7 +17,9 @@ public class Drawer extends JPanel{
 	private static EdgeShape[] edges;
 	private static int chromatic_number = 0;
 	private static int time = 0;
+	private static boolean gameOn = true;
 	
+	private static JFrame frame;
 	private static JLabel timeField = new JLabel("   Time Left: "+time+" s");
 	private static JLabel chrField = new JLabel("   Chromatic Number: "+chromatic_number);
 	private static JTextField vertexField = new JTextField(5);
@@ -91,6 +93,7 @@ public class Drawer extends JPanel{
 				changeColor(event);
 				updateHint();
 			}
+			
 			public void mouseReleased(MouseEvent event) {}
 			public void mouseClicked(MouseEvent event){}
 			public void mouseEntered(MouseEvent event){}
@@ -137,7 +140,7 @@ public class Drawer extends JPanel{
 		Graphics2D g_2D = (Graphics2D) g;
 		
 		//drawing shapes
-		g_2D.setStroke(new BasicStroke( 10.0F ));
+		g_2D.setStroke(new BasicStroke( 1.0F ));
 		if(edge.getVertexA().getColor() != edge.getVertexB().getColor()){
 			g_2D.setColor(Color.green);
 			g_2D.draw(edge.getShape());
@@ -195,20 +198,23 @@ public class Drawer extends JPanel{
 			public void run() {
 				timeField.setText("   Time Left: "+interval+" s");
 				System.out.println(setInterval());
-
+				if(interval ==52){
+				gameOver();
+				timer.cancel();
+				}	
 			}
 		}, delay, period);
 	}
 	
 	private static final int setInterval() {
-		if (interval == 1){
-			timer.cancel();
-		}
 		return --interval;
 	}
 	
-	public static void updateTime(int time){
-		timeField.setText("   Time Left: "+time+" s");
+	public static void gameOver(){
+		
+		System.out.println("GAME OVER");
+		frame.dispose();
+		
 	}
 	
 	public static void main(String[] args){
@@ -249,7 +255,7 @@ public class Drawer extends JPanel{
 		contentPanel.add(graphicPanel, BorderLayout.CENTER);
 		contentPanel.setPreferredSize(new Dimension(900, 723));
 		
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		
 		frame.setSize(1100, 723);
 		frame.add(contentPanel);
@@ -257,10 +263,5 @@ public class Drawer extends JPanel{
 		frame.setResizable(false);
 		
 		startTimer(60);
-		while(time>-1){
-			if(time ==52){
-				System.out.println("GAME OVER");
-			}
-		}
 	}
 }
