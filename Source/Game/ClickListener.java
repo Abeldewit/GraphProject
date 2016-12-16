@@ -26,7 +26,7 @@ public void actionPerformed(ActionEvent event) {
   Component2 component2 = new Component2();
 
   try{
-  BufferedImage img = ImageIO.read(new File("background5.jpeg"));
+  BufferedImage img = ImageIO.read(new File("resources/background5.jpeg"));
   ImageIcon icon = new ImageIcon(img);
   JLabel contentPane = new JLabel();
   contentPane.setIcon(icon);
@@ -43,15 +43,32 @@ public void actionPerformed(ActionEvent event) {
 
 
 
-ImageIcon water = new ImageIcon("Bitter.jpeg");
+ImageIcon water = new ImageIcon("resources/Bitter.jpeg");
   JButton Bitter= new JButton(water);
-ImageIcon time = new ImageIcon("timefrenzy.jpeg");
+ImageIcon time = new ImageIcon("resources/timefrenzy.jpeg");
   JButton mode2= new JButton(time);
-  ImageIcon random = new ImageIcon("random.jpeg");
+  ImageIcon random = new ImageIcon("resources/random.jpeg");
   JButton mode3= new JButton(random);
 
 
-
+  Bitter.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e)
+      {
+         Drawer.main();
+      }
+  });
+  mode2.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e)
+      {
+         Drawer.main();
+      }
+  });
+  mode3.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e)
+      {
+         Drawer.main();
+      }
+  });
 
 
 

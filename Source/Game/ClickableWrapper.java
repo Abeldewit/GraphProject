@@ -11,11 +11,15 @@ public class ClickableWrapper{
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		ClickableVertex c = new ClickableVertex(80,80);
-		ClickableVertex d = new ClickableVertex(90,90);
+		ClickableVertex d = new ClickableVertex(190,190);
 
 		window.add( c );
+<<<<<<< HEAD
+		window.add( d )
+=======
 		window.add(d);
 
+>>>>>>> origin/master
 		window.setVisible(true);
 
 	}

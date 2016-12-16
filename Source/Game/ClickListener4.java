@@ -15,6 +15,14 @@ import java.awt.BorderLayout;
 */
 public class ClickListener4 implements ActionListener {
 //Highscores
+
+JFrame menu;
+
+public ClickListener4(JFrame f) {
+  menu = f;
+}
+
+
 public void actionPerformed(ActionEvent event) {
   JFrame frame = new JFrame();
   final int FRAME_WIDTH = 700;
@@ -28,7 +36,7 @@ public void actionPerformed(ActionEvent event) {
 
 
   try{
-  BufferedImage img = ImageIO.read(new File("background5.jpeg"));
+  BufferedImage img = ImageIO.read(new File("resources/background5.jpeg"));
   ImageIcon icon = new ImageIcon(img);
   JLabel contentPane = new JLabel();
   contentPane.setIcon(icon);
@@ -42,8 +50,11 @@ public void actionPerformed(ActionEvent event) {
   JPanel backbutt = new JPanel();
   frame.add(backbutt, BorderLayout.PAGE_END);
   backbutt.setBackground(Color.black);
+
+  JPanel scores = new JPanel();
+
   JButton back = new JButton("BACK");
-  ActionListener listener = new ClickMenu();
+  ActionListener listener = new ClickMenu(menu);
   back.addActionListener(listener);
 
   backbutt.add(back);

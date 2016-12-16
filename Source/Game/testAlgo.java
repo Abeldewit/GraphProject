@@ -34,6 +34,7 @@ class GraphColoring
     /** Function to assign color **/
     public int graphColor(int[][] g, int noc)
     {
+
         V = g.length;
         numOfColors = noc;
         color = new int[V];
@@ -78,6 +79,7 @@ class GraphColoring
             if (graph[v][i] == 1 && c == color[i])
                 return false;
         return true;
+				
     }
     /** display solution **/
     public int display()

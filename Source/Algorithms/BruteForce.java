@@ -1,6 +1,10 @@
 public class BruteForce {
   public static void main(String[] args) {
-    int colourAmount = 1;
+    
+	graphGen randomgraph = new graphGen(v, e);
+	int[][] adjecentMatrix = randomgraph.getMatrix();
+	
+	int colourAmount = 1;
     int[] colourArray = new int[n];
 
     for(int i = 0; i < n; i++) {
@@ -45,7 +49,7 @@ public class BruteForce {
 //color ok
    for(int c = 1; c <= m; c++)
    {
-   //	System.out.println("    Testing colour " + c);
+   System.out.println("    Testing colour " + c);
        if(isSafe(k,c,G,n,x))
        {
          x[k] = c; if(k+1 < n)
@@ -57,18 +61,18 @@ public class BruteForce {
            for(int z = 0; z < n; z++)
            {
 
-          //		System.out.println("        Testing vertex " + z);
+             System.out.println("        Testing vertex " + z);
 
              if(x[z] != 0)
              {
-               //System.out.println("Sufficient colours");
-           //		System.out.print(x[k]);
+               System.out.println("Sufficient colours");
+               System.out.print(x[k]);
                test = true;
                sufficientC = true;
 
              } else
              {
-           //		System.out.println("Too little colours");
+               System.out.println("Too little colours");
                sufficientC = false;
              }
 
@@ -93,6 +97,4 @@ public class BruteForce {
    }
    return true;
  }
-
-  }
 }
