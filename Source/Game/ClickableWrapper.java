@@ -14,12 +14,9 @@ public class ClickableWrapper{
 		ClickableVertex d = new ClickableVertex(190,190);
 
 		window.add( c );
-<<<<<<< HEAD
-		window.add( d )
-=======
+
 		window.add(d);
 
->>>>>>> origin/master
 		window.setVisible(true);
 
 	}

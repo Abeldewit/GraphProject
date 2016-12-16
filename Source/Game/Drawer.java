@@ -10,21 +10,22 @@ import javax.imageio.*;
 import java.awt.image.BufferedImage;
 import java.lang.*;
 
-public class Drawer extends JPanel implements Runnable {
+
+public class Drawer extends JPanel  implements Runnable{
 
 	private VertexShape[] vertecies;
 	private EdgeShape[] edges;
+	private static int chromatic_number = 0;
+	private static int time = 0;
 	final  ThreadGroup graphshapegroup = new  ThreadGroup("graphshape");
 	public static int version = 0;
-
-	private static JLabel chrField = new JLabel();
+	private static JLabel timeField = new JLabel("   Time Left: "+time+" s");
+	private static JLabel chrField = new JLabel("   Chromatic Number: "+chromatic_number);
 	private static JTextField vertexField = new JTextField(5);
 	private static JTextField edgeField = new JTextField(5);
 	private static JButton startButton = new JButton("generate");
+	private static JPanel controlPanel;
 	private static JPanel graphicPanel;
-
-
-	private static int chromatic_number = 0;
 
 	public Drawer() {
 		version++;
@@ -35,14 +36,13 @@ public class Drawer extends JPanel implements Runnable {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 try{
-
-					BufferedImage image = ImageIO.read(new File("resources/background5.jpeg"));
-
+					BufferedImage image = ImageIO.read(new File("Resources/background5.jpeg"));
 					g.drawImage(image, 0, 0, null);
 				}catch(IOException e) {e.printStackTrace();}
             }
         };
 
+		controlPanel = new JPanel();
 
 		class StartButtonListener implements ActionListener, Runnable{
 			Drawer d;
@@ -58,7 +58,7 @@ public class Drawer extends JPanel implements Runnable {
 
 				};
 			}
-			public void actionPerformed(ActionEvent event){
+			public void actionPerformed(ActionEvent event) {
 
 				Graphics g = graphicPanel.getGraphics();
 				Graphics2D g_2D = (Graphics2D) g;
@@ -78,10 +78,6 @@ public class Drawer extends JPanel implements Runnable {
 				//bruteforcing solution
 
 
-
-
-
-
 				//defining the new set
 				GraphShape graph = new GraphShape(v,e,adjacencyMatrix);
 				Thread t = new Thread(graphshapegroup,graph);
@@ -89,9 +85,6 @@ public class Drawer extends JPanel implements Runnable {
 
 				vertecies = graph.getVertecies();
 				edges = graph.getEdges();
-
-
-
 
 				//drawing the edges
 				for(int i=0;i<edges.length;i++){
@@ -101,6 +94,8 @@ public class Drawer extends JPanel implements Runnable {
 				//drawing the vertecies
 				for(int i=0;i<vertecies.length;i++){
 					drawVertex(vertecies[i]);
+
+				//startTimer(60);
 				}
 			}
 		}
@@ -140,7 +135,6 @@ public class Drawer extends JPanel implements Runnable {
 
 	}
 
-
 	public void drawBackground(){
 
 		//accessing the graphicPanel
@@ -169,7 +163,6 @@ public class Drawer extends JPanel implements Runnable {
 		g_2D.setColor(vertex.getColor());
 		g_2D.fill(vertex.getShape());
 
-
 	}
 	public void run(){
 
@@ -183,20 +176,18 @@ public class Drawer extends JPanel implements Runnable {
 		Graphics g = graphicPanel.getGraphics();
 		Graphics2D g_2D = (Graphics2D) g;
 
-
 		//drawing shapes
-		g_2D.setStroke(new BasicStroke());
+		g_2D.setStroke(new BasicStroke( 1.0F ));
 		if(edge.getVertexA().getColor() != edge.getVertexB().getColor()){
 			g_2D.setColor(Color.green);
 			g_2D.draw(edge.getShape());
-			g_2D.setStroke(new BasicStroke());
+			g_2D.setStroke(new BasicStroke( 4.0F ));
 		}else{
 			g_2D.setColor(Color.red);
 			g_2D.draw(edge.getShape());
-			g_2D.setStroke(new BasicStroke());
+			g_2D.setStroke(new BasicStroke( 4.0F ));
 		}
 	}
-
 
 	public void changeColor(MouseEvent event){
 
@@ -205,7 +196,6 @@ public class Drawer extends JPanel implements Runnable {
 		Graphics2D g_2D = (Graphics2D) g;
 
 		VertexShape vertexToChange = null;
-
 
 		//drawing shapes
 		for(int i=0;i<vertecies.length;i++){
@@ -219,13 +209,11 @@ public class Drawer extends JPanel implements Runnable {
 		}
 	}
 
-
 	public void updateHint(){
 
 		//accessing the graphic panel
 		Graphics g = graphicPanel.getGraphics();
 		Graphics2D g_2D = (Graphics2D) g;
-
 
 		//redrawing the shapes
 		for(int i=0;i<edges.length;i++){
@@ -236,35 +224,47 @@ public class Drawer extends JPanel implements Runnable {
 		}
 	}
 
-	public void solve(){
-		for(int i=0;i<vertecies.length;i++){
-			for(int j=0;j<edges.length;j++){
-				if(vertecies[i] == edges[j].getVertexA() ||
-				   vertecies[i] == edges[j].getVertexB()    ){
+	public static void startTimer(int start){
 
-				}
-			}
+		time = start;
+		while(time>-1){
+			try {
+				Thread.sleep(1000);
+				System.out.println("time "+time);
+				updateTime(time);
+				time--;
+				} catch(InterruptedException ex) {Thread.currentThread().interrupt();}
 		}
+	}
+
+
+	public static void updateTime(int time){
+		timeField.setText("   Time Left: "+time+" s");
 	}
 
 	public static void main(){
 
 		Drawer d = new Drawer();
 
-		JLabel vertexLabel = new JLabel("Vertecies: ");
-		JLabel edgeLabel = new JLabel("     Edges: ");
+		JLabel vertexLabel = new JLabel("Vertecies:  ");
+		JLabel edgeLabel = new JLabel(  "    Edges:  ");
+
 		vertexLabel.setForeground(Color.WHITE);
 		edgeLabel.setForeground(Color.WHITE);
-		JPanel controlPanel = new JPanel(){
-		@Override
-		protected void paintComponent(Graphics g) {
+		timeField.setForeground(Color.WHITE);
+		chrField.setForeground(Color.WHITE);
+
+
+		controlPanel = new JPanel(){
+			@Override
+			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				try{
-	BufferedImage image = ImageIO.read(new File("resources/background5.jpeg"));
-	g.drawImage(image, 0, 0, null);
-}catch(IOException e) {e.printStackTrace();}
-		}
-};
+			BufferedImage image = ImageIO.read(new File("Resources/background5.jpeg"));
+			g.drawImage(image, 0, 0, null);
+			}catch(IOException e) {e.printStackTrace();}
+			}
+		};
 		controlPanel.setPreferredSize(new Dimension(150,150));
 
 		controlPanel.add(vertexLabel);
@@ -272,24 +272,22 @@ public class Drawer extends JPanel implements Runnable {
 		controlPanel.add(edgeLabel);
 		controlPanel.add(edgeField);
 		controlPanel.add(startButton);
-
-
-
+		controlPanel.add(chrField);
+		controlPanel.add(timeField);
 
 		JPanel contentPanel = new JPanel(new BorderLayout());
 		contentPanel.add(controlPanel, BorderLayout.LINE_END);
 		contentPanel.add(graphicPanel, BorderLayout.CENTER);
 		contentPanel.setPreferredSize(new Dimension(900, 723));
 
-
-
 		JFrame frame = new JFrame();
-
-
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setSize(1100, 723);
 		frame.add(contentPanel);
 		frame.setVisible(true);
 		frame.setResizable(false);
+		// startTimer(60);
+
 
 	}
 }

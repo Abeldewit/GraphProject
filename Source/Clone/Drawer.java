@@ -8,20 +8,31 @@ import java.util.Random;
 import java.io.*;
 import javax.imageio.*;
 import java.awt.image.BufferedImage;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.*;
 
 public class Drawer extends JPanel{
 	
-	private VertexShape[] vertecies;
-	private EdgeShape[] edges;
+	private static VertexShape[] vertecies;
+	private static EdgeShape[] edges;
 	private static int chromatic_number = 0;
-	private static int time = 0;
+	private static int time = 60;
+	private static boolean gameOn = true;
+	private static int score = 0;
 	
+	private static JFrame frame;
 	private static JLabel timeField = new JLabel("   Time Left: "+time+" s");
 	private static JLabel chrField = new JLabel("   Chromatic Number: "+chromatic_number);
+	private static JLabel scoreField = new JLabel("   Score: "+score);
 	private static JTextField vertexField = new JTextField(5);
 	private static JTextField edgeField = new JTextField(5);
 	private static JButton startButton = new JButton("generate");
+	private static JPanel controlPanel;
 	private static JPanel graphicPanel;
+	
+	static int interval;
+	static Timer timer;
 	
 	public Drawer() {
 		
@@ -30,15 +41,17 @@ public class Drawer extends JPanel{
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 try{
-					BufferedImage image = ImageIO.read(new File("Resources/background5.jpeg"));
+					BufferedImage image = ImageIO.read(new File("resources/background5.jpeg"));
 					g.drawImage(image, 0, 0, null);
 				}catch(IOException e) {e.printStackTrace();}
             }
         };
 		
+		controlPanel = new JPanel();
+		
 		class StartButtonListener implements ActionListener{
 			
-			public void actionPerformed(ActionEvent event){
+			public void actionPerformed(ActionEvent event) {
 				
 				Graphics g = graphicPanel.getGraphics();
 				Graphics2D g_2D = (Graphics2D) g;
@@ -54,7 +67,10 @@ public class Drawer extends JPanel{
 				int[][] adjacencyMatrix = randomgraph.getMatrix();
 				
 				//bruteforcing solution
-				
+				Force brute = new Force(v,e,adjacencyMatrix);
+				chromatic_number = brute.getChr();
+				System.out.println("CHR received");
+				chrField.setText("   Chromatic Number: "+chromatic_number);
 				
 				//defining the new set
 				GraphShape graph = new GraphShape(v,e,adjacencyMatrix);
@@ -70,9 +86,6 @@ public class Drawer extends JPanel{
 				for(int i=0;i<vertecies.length;i++){
 					drawVertex(vertecies[i]);
 				}
-				
-				startTimer();
-				
 			}
 		}
 		//listener
@@ -83,6 +96,7 @@ public class Drawer extends JPanel{
 				changeColor(event);
 				updateHint();
 			}
+			
 			public void mouseReleased(MouseEvent event) {}
 			public void mouseClicked(MouseEvent event){}
 			public void mouseEntered(MouseEvent event){}
@@ -92,7 +106,7 @@ public class Drawer extends JPanel{
 		graphicPanel.addMouseListener(new MousePressListener());
 	}
 	
-	public void drawBackground(){
+	public static void drawBackground(){
 		
 		//accessing the graphicPanel
 		Graphics g = graphicPanel.getGraphics();
@@ -102,13 +116,13 @@ public class Drawer extends JPanel{
 				
 		//redrawing empty background
 		try{
-			BufferedImage image = ImageIO.read(new File("Resources/background5.jpeg"));
+			BufferedImage image = ImageIO.read(new File("resources/background5.jpeg"));
 			g.drawImage(image, 0, 0, null);
 		}catch(IOException ex) {ex.printStackTrace();}
 		
 	}
 	
-	public void drawVertex( VertexShape vertex ){
+	public static void drawVertex( VertexShape vertex ){
 		
 		//accessing the graphicPanel
 		Graphics g = graphicPanel.getGraphics();
@@ -129,12 +143,14 @@ public class Drawer extends JPanel{
 		Graphics2D g_2D = (Graphics2D) g;
 		
 		//drawing shapes
-		g_2D.setStroke(new BasicStroke( 10.0F ));
+		g_2D.setStroke(new BasicStroke( 1.0F ));
 		if(edge.getVertexA().getColor() != edge.getVertexB().getColor()){
+			edge.setColor(Color.green);
 			g_2D.setColor(Color.green);
 			g_2D.draw(edge.getShape());
 			g_2D.setStroke(new BasicStroke( 4.0F ));
 		}else{
+			edge.setColor(Color.red);
 			g_2D.setColor(Color.red);
 			g_2D.draw(edge.getShape());
 			g_2D.setStroke(new BasicStroke( 4.0F ));
@@ -176,24 +192,100 @@ public class Drawer extends JPanel{
 		}
 	}
 	
-	public void startTimer() throws InterruptedException {
+	public static void startTimer(int start){
 		
-		time = 60;
+		int delay = 1000;
+		int period = 1000;
+		timer = new Timer();
+		interval = start;
+		timer.scheduleAtFixedRate(new TimerTask() {
+
+			public void run() {
+				if(interval<60){
+					timeField.setText("   Time Left: "+interval+" s");
+					updateScore();
+				}
+				System.out.println(setInterval());
+				if(interval ==0){
+				gameOver();
+				timer.cancel();
+				}	
+			}
+		}, delay, period);
+	}
+	
+	private static final int setInterval() {
+		return --interval;
+	}
+	
+	public static void gameOver(){
 		
-		while(time>0){
-			Thread.sleep(1000);
-			time --;
+		System.out.println("GAME OVER");
+		frame.dispose();
+		new GameOver(100);
+		
+	}
+	
+	public static void updateScore(){
+		
+		boolean valid = true;
+		
+		for(int i=0;i<edges.length;i++){
+			if(edges[i].getColor() == Color.red){
+				score = 0;
+				System.out.println("score set to none");
+				scoreField.setText("   Score: "+score);
+				valid = false;
+				break;
+			}
+		}
+		if(valid){
+			score = vertecies.length * edges.length * interval - 100 * (countUsedColors() - chromatic_number);
+			scoreField.setText("   Score: "+score);
 		}
 	}
 	
-	public static void main(String[] args){
+	public static int countUsedColors(){
+		ArrayList<Color> usedColours = new ArrayList<Color>();
+		
+		for(int i=0;i<vertecies.length;i++){
+			if(i==0){
+				usedColours.add(vertecies[0].getColor());
+			}else{
+				if(!usedColours.contains(vertecies[i].getColor())){
+					usedColours.add(vertecies[i].getColor());
+				}
+			}
+		}
+		return (usedColours.size());
+	}
+	
+	public static void main(String args[]){
 		
 		Drawer d = new Drawer();
 		
-		JLabel vertexLabel = new JLabel("Vertecies: ");
-		JLabel edgeLabel = new JLabel("Edges: ");
+		JLabel vertexLabel = new JLabel("Vertecies:  ");
+		JLabel edgeLabel = new JLabel("    Edges:    ");
 		
-		JPanel controlPanel = new JPanel();
+		vertexLabel.setForeground(Color.WHITE);
+		edgeLabel.setForeground(Color.WHITE);
+		timeField.setForeground(Color.WHITE);
+		chrField.setForeground(Color.WHITE);
+		scoreField.setForeground(Color.WHITE);
+		
+		
+		controlPanel = new JPanel(){
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				try{
+			BufferedImage image = ImageIO.read(new File("resources/background5.jpeg"));
+			g.drawImage(image, 0, 0, null);
+			}catch(IOException e) {e.printStackTrace();}
+			}
+		};
+		controlPanel.setPreferredSize(new Dimension(150,150));
+		
 		controlPanel.add(vertexLabel);
 		controlPanel.add(vertexField);
 		controlPanel.add(edgeLabel);
@@ -201,17 +293,20 @@ public class Drawer extends JPanel{
 		controlPanel.add(startButton);
 		controlPanel.add(chrField);
 		controlPanel.add(timeField);
+		controlPanel.add(scoreField);
 		
 		JPanel contentPanel = new JPanel(new BorderLayout());
-		contentPanel.add(controlPanel, BorderLayout.SOUTH);
+		contentPanel.add(controlPanel, BorderLayout.LINE_END);
 		contentPanel.add(graphicPanel, BorderLayout.CENTER);
 		contentPanel.setPreferredSize(new Dimension(900, 723));
 		
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		
 		frame.setSize(1100, 723);
 		frame.add(contentPanel);
 		frame.setVisible(true);
 		frame.setResizable(false);
-	}	
+		
+		startTimer(70);
+	}
 }

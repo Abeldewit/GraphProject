@@ -6,6 +6,7 @@ public class EdgeShape{
 	private Line2D.Double line;
 	private VertexShape A;
 	private VertexShape B;
+	private Color color;
 	
 	public EdgeShape(VertexShape A,VertexShape B){
 		
@@ -29,5 +30,11 @@ public class EdgeShape{
 	}
 	public VertexShape getVertexB(){
 		return B;
+	}
+	public void setColor(Color color){
+		this.color = color;
+	}
+	public Color getColor(){
+		return color;
 	}
 }
