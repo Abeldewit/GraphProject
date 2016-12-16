@@ -8,11 +8,13 @@ import java.util.Random;
 import java.io.*;
 import javax.imageio.*;
 import java.awt.image.BufferedImage;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Drawer extends JPanel{
 	
-	private VertexShape[] vertecies;
-	private EdgeShape[] edges;
+	private static VertexShape[] vertecies;
+	private static EdgeShape[] edges;
 	private static int chromatic_number = 0;
 	private static int time = 0;
 	
@@ -21,7 +23,11 @@ public class Drawer extends JPanel{
 	private static JTextField vertexField = new JTextField(5);
 	private static JTextField edgeField = new JTextField(5);
 	private static JButton startButton = new JButton("generate");
+	private static JPanel controlPanel;
 	private static JPanel graphicPanel;
+	
+	static int interval;
+	static Timer timer;
 	
 	public Drawer() {
 		
@@ -36,9 +42,11 @@ public class Drawer extends JPanel{
             }
         };
 		
+		controlPanel = new JPanel();
+		
 		class StartButtonListener implements ActionListener{
 			
-			public void actionPerformed(ActionEvent event){
+			public void actionPerformed(ActionEvent event) {
 				
 				Graphics g = graphicPanel.getGraphics();
 				Graphics2D g_2D = (Graphics2D) g;
@@ -54,7 +62,10 @@ public class Drawer extends JPanel{
 				int[][] adjacencyMatrix = randomgraph.getMatrix();
 				
 				//bruteforcing solution
-				
+				Force brute = new Force(v,e,adjacencyMatrix);
+				chromatic_number = brute.getChr();
+				System.out.println("CHR received");
+				chrField.setText("   Chromatic Number: "+chromatic_number);
 				
 				//defining the new set
 				GraphShape graph = new GraphShape(v,e,adjacencyMatrix);
@@ -70,9 +81,6 @@ public class Drawer extends JPanel{
 				for(int i=0;i<vertecies.length;i++){
 					drawVertex(vertecies[i]);
 				}
-				
-				startTimer();
-				
 			}
 		}
 		//listener
@@ -92,7 +100,7 @@ public class Drawer extends JPanel{
 		graphicPanel.addMouseListener(new MousePressListener());
 	}
 	
-	public void drawBackground(){
+	public static void drawBackground(){
 		
 		//accessing the graphicPanel
 		Graphics g = graphicPanel.getGraphics();
@@ -108,7 +116,7 @@ public class Drawer extends JPanel{
 		
 	}
 	
-	public void drawVertex( VertexShape vertex ){
+	public static void drawVertex( VertexShape vertex ){
 		
 		//accessing the graphicPanel
 		Graphics g = graphicPanel.getGraphics();
@@ -176,24 +184,58 @@ public class Drawer extends JPanel{
 		}
 	}
 	
-	public void startTimer() throws InterruptedException {
+	public static void startTimer(int start){
 		
-		time = 60;
-		
-		while(time>0){
-			Thread.sleep(1000);
-			time --;
+		int delay = 1000;
+		int period = 1000;
+		timer = new Timer();
+		interval = start;
+		timer.scheduleAtFixedRate(new TimerTask() {
+
+			public void run() {
+				timeField.setText("   Time Left: "+interval+" s");
+				System.out.println(setInterval());
+
+			}
+		}, delay, period);
+	}
+	
+	private static final int setInterval() {
+		if (interval == 1){
+			timer.cancel();
 		}
+		return --interval;
+	}
+	
+	public static void updateTime(int time){
+		timeField.setText("   Time Left: "+time+" s");
 	}
 	
 	public static void main(String[] args){
 		
 		Drawer d = new Drawer();
 		
-		JLabel vertexLabel = new JLabel("Vertecies: ");
-		JLabel edgeLabel = new JLabel("Edges: ");
+		JLabel vertexLabel = new JLabel("Vertecies:  ");
+		JLabel edgeLabel = new JLabel("    Edges:    ");
 		
-		JPanel controlPanel = new JPanel();
+		vertexLabel.setForeground(Color.WHITE);
+		edgeLabel.setForeground(Color.WHITE);
+		timeField.setForeground(Color.WHITE);
+		chrField.setForeground(Color.WHITE);
+		
+		
+		controlPanel = new JPanel(){
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				try{
+			BufferedImage image = ImageIO.read(new File("Resources/background5.jpeg"));
+			g.drawImage(image, 0, 0, null);
+			}catch(IOException e) {e.printStackTrace();}
+			}
+		};
+		controlPanel.setPreferredSize(new Dimension(150,150));
+		
 		controlPanel.add(vertexLabel);
 		controlPanel.add(vertexField);
 		controlPanel.add(edgeLabel);
@@ -203,7 +245,7 @@ public class Drawer extends JPanel{
 		controlPanel.add(timeField);
 		
 		JPanel contentPanel = new JPanel(new BorderLayout());
-		contentPanel.add(controlPanel, BorderLayout.SOUTH);
+		contentPanel.add(controlPanel, BorderLayout.LINE_END);
 		contentPanel.add(graphicPanel, BorderLayout.CENTER);
 		contentPanel.setPreferredSize(new Dimension(900, 723));
 		
@@ -213,5 +255,12 @@ public class Drawer extends JPanel{
 		frame.add(contentPanel);
 		frame.setVisible(true);
 		frame.setResizable(false);
-	}	
+		
+		startTimer(60);
+		while(time>-1){
+			if(time ==52){
+				System.out.println("GAME OVER");
+			}
+		}
+	}
 }

@@ -1,28 +1,25 @@
-public class testAlgo{
+public class GraphColoring{
 
-	public static void main(String[] args){
-
-		int v = 16;
-		int e = 110;
-
-		graphGen randomgraph = new graphGen(v, e);
-		int[][] graph = randomgraph.getMatrix();
-
+	private static int chr;
+	
+	public GraphColoring(int v, int e, int[][] matrix){
 
 		int M = 0; // Number of colors
-
-		// while(!Chr.graphColoring(graph, M, v)){
-		// 	M++;
-		// }
-
-		// while(graphColor(graph,M) == 0){
-		// 	M++;
-		// }
 		GraphColoring n = new GraphColoring();
-
-		System.out.println(n.graphColor(graph,15));
-		M = n.graphColor(graph,15);
+		
+		 while(n.graphColor(graph,M) == 0){
+		 	M++;
+		}
+		
+		System.out.println(n.graphColor(graph,M));
+		M = n.graphColor(graph,M);
 		System.out.println("Chromatic number:"+M);
+		
+		this.chr = M;
+	}
+	
+	public int getChr(){
+		return chr;
 	}
 }
 class GraphColoring
