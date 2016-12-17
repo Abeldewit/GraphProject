@@ -13,7 +13,7 @@ import java.util.TimerTask;
 import java.util.*;
 
 public class Drawer extends JPanel{
-	
+
 
 	private static VertexShape[] vertecies;
 	private static EdgeShape[] edges;
@@ -97,6 +97,7 @@ public class Drawer extends JPanel{
 
 				changeColor(event);
 				updateHint();
+				updateScore();
 
 				//checking whether the game should finish
 					boolean red = false;
@@ -108,9 +109,13 @@ public class Drawer extends JPanel{
 					if(red == false) {
 						if(countUsedColors() - chromatic_number == 0) {
 							System.out.println("You've won with score: " + score);
+							timer.cancel();
 							gameOver();
-						} else {
+						} else if(countUsedColors() - chromatic_number > 0) {
 							System.out.println("Solved but to many colors");
+						} else {
+							System.out.println("You're smarter than the system!");
+							gameOver();
 						}
 					}
 
