@@ -88,6 +88,8 @@ public class Drawer extends JPanel{
 				for(int i=0;i<vertecies.length;i++){
 					drawVertex(vertecies[i]);
 				}
+
+				startTimer(60);
 			}
 		}
 		//listener
@@ -115,6 +117,7 @@ public class Drawer extends JPanel{
 							System.out.println("Solved but to many colors");
 						} else {
 							System.out.println("You're smarter than the system!");
+							timer.cancel();
 							gameOver();
 						}
 					}
@@ -331,6 +334,6 @@ public class Drawer extends JPanel{
 		frame.setVisible(true);
 		frame.setResizable(false);
 
-		startTimer(70);
+		//startTimer(70);
 	}
 }
